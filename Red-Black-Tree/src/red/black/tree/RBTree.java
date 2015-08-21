@@ -61,6 +61,37 @@ public class RBTree {
         }
       }
    }
+   private RBNode leftRotate(RBNode node){
+        RBNode temp = node.rightChild;
+        node.rightChild = temp.leftChild;
+        temp.leftChild = node;
+        return temp;
+   }
+   private RBNode rightRotate(RBNode node){
+        RBNode temp = node.leftChild;
+        node.leftChild = temp.rightChild;
+        temp.rightChild = node;
+        return temp;
+   }
+   private boolean iFlipColor(RBNode parent){
+        if(!parent.isIsRed()){
+             if(parent.leftChild!=null&&parent.rightChild!=null
+                     &&parent.leftChild.isIsRed()&&parent.rightChild.isIsRed()){
+                  parent.leftChild.setIsRed(true);
+                  parent.rightChild.setIsRed(true);
+                    return true;
+             }
+             else
+               return false;
+        }
+       return false;
+   }
+   private void iSwitchColor(RBNode parent){
+        if(parent.isIsRed())
+           parent.setIsRed(false);
+        else
+            parent.setIsRed(true);
+   }
    private void inOrder(RBNode root){
       if(root==null)
           return;
